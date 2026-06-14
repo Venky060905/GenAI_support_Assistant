@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+langchain
+langchain-community
+faiss-cpu
+sentence-transformers
+pypdf
+plotly
+textblob
+python-dotenv
+sqlite-utils
