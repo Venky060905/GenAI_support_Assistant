@@ -1,4 +1,6 @@
+import logging
 import sys
+import traceback
 from pathlib import Path
 
 import streamlit as st
@@ -10,8 +12,12 @@ if str(ROOT_DIR) not in sys.path:
 
 from src.config.settings import APP_NAME
 from src.database.db import DatabaseManager
-from src.rag.pdf_loader import PDFLoader
 from src.rag.document_processor import DocumentProcessor
+from src.rag.pdf_loader import PDFLoader
+from src.rag.text_chunker import TextChunker
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------
 # Initialize Database
@@ -124,14 +130,39 @@ elif page == "📄 Upload Documents":
 
                 if pdf_info["success"]:
 
+                    # Analyze document
                     analysis = DocumentProcessor.analyze(
                         pdf_info["text"]
                     )
 
+                    # Create chunks
+                    chunks = []
+                    try:
+                        chunks = TextChunker.create_chunks(
+                            pdf_info["text"]
+                        )
+                        logger.debug(
+                            "Text length=%s chunk_count=%s",
+                            len(pdf_info["text"]),
+                            len(chunks)
+                        )
+                    except Exception as exc:
+                        logger.exception("Chunk generation failed")
+                        st.error(
+                            f"Chunk generation failed: {exc}"
+                        )
+                        st.text(
+                            traceback.format_exc()
+                        )
+
+                    st.write("Text Length:", len(pdf_info["text"]))
+                    st.write("Chunk Count:", len(chunks))
+                    st.write(chunks[:2])
+
                     st.markdown("---")
                     st.subheader("Document Analysis")
 
-                    col1, col2, col3 = st.columns(3)
+                    col1, col2, col3, col4 = st.columns(4)
 
                     col1.metric(
                         "Pages",
@@ -148,6 +179,12 @@ elif page == "📄 Upload Documents":
                         analysis["characters"]
                     )
 
+                    col4.metric(
+                        "Chunks",
+                        len(chunks)
+                    )
+
+                    # Preview extracted text
                     st.subheader(
                         "Document Preview"
                     )
@@ -155,7 +192,29 @@ elif page == "📄 Upload Documents":
                     st.text_area(
                         "Extracted Text",
                         analysis["preview"],
-                        height=350
+                        height=250
+                    )
+
+                    # Preview chunks
+                    st.subheader(
+                        "Chunk Preview"
+                    )
+
+                    if chunks:
+                        for index, chunk in enumerate(chunks[:3], start=1):
+                            st.text_area(
+                                f"Chunk {index}",
+                                chunk,
+                                height=200
+                            )
+                    else:
+                        st.info(
+                            "No chunks were generated from this document. "
+                            "If the PDF text is very short, the chunk size may be larger than the text length."
+                        )
+
+                    st.success(
+                        f"Successfully created {len(chunks)} chunks."
                     )
 
                 else:
@@ -197,26 +256,6 @@ elif page == "📄 Upload Documents":
         st.info(
             "No documents uploaded yet."
         )
-
-elif page == "🎫 Tickets":
-
-    st.title("Support Tickets")
-
-    st.info(
-        "Ticket Management Module Coming Soon"
-    )
-
-# ---------------------------------------
-# Analytics
-# ---------------------------------------
-
-elif page == "📊 Analytics":
-
-    st.title("Analytics Dashboard")
-
-    st.info(
-        "Analytics Dashboard Coming Soon"
-    )
 
 # ---------------------------------------
 # Feedback
