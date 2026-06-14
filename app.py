@@ -4,13 +4,19 @@ from pathlib import Path
 import streamlit as st
 
 ROOT_DIR = Path(__file__).resolve().parent
+
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from src.config.settings import APP_NAME
 from src.database.db import DatabaseManager
+from src.rag.pdf_loader import PDFLoader
+from src.rag.document_processor import DocumentProcessor
 
+# ---------------------------------------
 # Initialize Database
+# ---------------------------------------
+
 db = DatabaseManager()
 
 # ---------------------------------------
@@ -93,17 +99,82 @@ elif page == "📄 Upload Documents":
         from src.utils.file_handler import save_uploaded_file
 
         try:
-            saved_path, file_exists = save_uploaded_file(uploaded_file)
+
+            saved_path, file_exists = save_uploaded_file(
+                uploaded_file
+            )
 
             if file_exists:
-                db.add_document(uploaded_file.name)
-                st.success(f"{uploaded_file.name} uploaded successfully.")
+
+                db.add_document(
+                    uploaded_file.name
+                )
+
+                st.success(
+                    f"{uploaded_file.name} uploaded successfully."
+                )
+
+                # --------------------------------
+                # PDF EXTRACTION
+                # --------------------------------
+
+                pdf_info = PDFLoader.extract_text(
+                    saved_path
+                )
+
+                if pdf_info["success"]:
+
+                    analysis = DocumentProcessor.analyze(
+                        pdf_info["text"]
+                    )
+
+                    st.markdown("---")
+                    st.subheader("Document Analysis")
+
+                    col1, col2, col3 = st.columns(3)
+
+                    col1.metric(
+                        "Pages",
+                        pdf_info["pages"]
+                    )
+
+                    col2.metric(
+                        "Words",
+                        analysis["words"]
+                    )
+
+                    col3.metric(
+                        "Characters",
+                        analysis["characters"]
+                    )
+
+                    st.subheader(
+                        "Document Preview"
+                    )
+
+                    st.text_area(
+                        "Extracted Text",
+                        analysis["preview"],
+                        height=350
+                    )
+
+                else:
+
+                    st.error(
+                        f"PDF Extraction Error: {pdf_info['error']}"
+                    )
+
             else:
-                st.error("File upload completed but the file is missing on disk.")
+
+                st.error(
+                    "File upload failed."
+                )
 
         except Exception as exc:
-            st.error(f"Failed to save uploaded PDF: {exc}")
-            st.warning("Please check server logs for more details.")
+
+            st.error(
+                f"Failed to process PDF: {exc}"
+            )
 
     st.markdown("---")
 
@@ -116,14 +187,16 @@ elif page == "📄 Upload Documents":
     if documents:
 
         for doc in documents:
-            st.write(f"📄 {doc[1]}")
+
+            st.write(
+                f"📄 {doc[1]}"
+            )
 
     else:
-        st.info("No documents uploaded yet.")
 
-# ---------------------------------------
-# Tickets
-# ---------------------------------------
+        st.info(
+            "No documents uploaded yet."
+        )
 
 elif page == "🎫 Tickets":
 

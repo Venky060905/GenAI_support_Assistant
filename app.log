@@ -13,3 +13,28 @@
 2026-06-14 20:06:35,054 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
 2026-06-14 20:06:35,056 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\american_Express_resume_data_analyst.pdf
 2026-06-14 20:06:35,060 | INFO | customer_support_assistant | File exists after save: True
+2026-06-14 21:35:51,731 | INFO | customer_support_assistant | Starting file save for uploaded PDF
+2026-06-14 21:35:51,731 | INFO | customer_support_assistant | Current Working Directory: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant
+2026-06-14 21:35:51,738 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
+2026-06-14 21:35:51,739 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\AZ5731403171.pdf
+2026-06-14 21:35:51,741 | INFO | customer_support_assistant | File exists after save: True
+2026-06-14 21:38:55,767 | INFO | customer_support_assistant | Starting file save for uploaded PDF
+2026-06-14 21:38:55,767 | INFO | customer_support_assistant | Current Working Directory: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant
+2026-06-14 21:38:55,767 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
+2026-06-14 21:38:55,767 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\Sample-Questions 2026 (1).pdf
+2026-06-14 21:38:55,767 | INFO | customer_support_assistant | File exists after save: True
+2026-06-14 21:57:56,737 | INFO | customer_support_assistant | Starting file save for uploaded PDF
+2026-06-14 21:57:56,737 | INFO | customer_support_assistant | Current Working Directory: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant
+2026-06-14 21:57:56,739 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
+2026-06-14 21:57:56,739 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\VENKATESH-K_DATA_ANALYST.pdf
+2026-06-14 21:57:56,743 | INFO | customer_support_assistant | File exists after save: True
+2026-06-14 21:58:16,626 | INFO | customer_support_assistant | Starting file save for uploaded PDF
+2026-06-14 21:58:16,626 | INFO | customer_support_assistant | Current Working Directory: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant
+2026-06-14 21:58:16,626 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
+2026-06-14 21:58:16,626 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\VENKATESH-K_DATA_ANALYST.pdf
+2026-06-14 21:58:16,635 | INFO | customer_support_assistant | File exists after save: True
+2026-06-14 21:59:21,210 | INFO | customer_support_assistant | Starting file save for uploaded PDF
+2026-06-14 21:59:21,211 | INFO | customer_support_assistant | Current Working Directory: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant
+2026-06-14 21:59:21,211 | INFO | customer_support_assistant | Resolved PDF_DIR: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs
+2026-06-14 21:59:21,211 | INFO | customer_support_assistant | Saving uploaded file to: C:\Users\MY PC\Downloads\generative-ai-customer-support-assistant\data\pdfs\AZ5731403171.pdf
+2026-06-14 21:59:21,211 | INFO | customer_support_assistant | File exists after save: True
